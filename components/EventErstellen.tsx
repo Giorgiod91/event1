@@ -1,16 +1,36 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { api } from "~/trpc/react";
 
 type Props = {};
 
 function EventErstellen({}: Props) {
+  const [event, setEvent] = useState("");
+  const {
+    data: tasks,
+    isLoading,
+    refetch: refetchEvents,
+  } = api.event.getAll.useQuery();
+  const createEventMutation = api.event.create.useMutation();
+  const updateEventMutation = api.event.update.useMutation();
+
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [showPlan, setShowPlan] = useState(false);
   const [eventTeilNahme, setEventTeilNahme] = useState(false);
+  const createEvent = api.event.create.useMutation({
+    onSuccess: () => {
+      void refetchEvents();
+    },
+  });
+  const updateTask = api.event.update.useMutation({
+    onSuccess: () => {
+      void refetchEvents();
+    },
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,7 +79,7 @@ function EventErstellen({}: Props) {
             />
             <motion.button
               type="submit"
-              className="btn via-magenta-500 w-full bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+              className="via-magenta-500 btn w-full bg-gradient-to-r from-slate-500 to-pink-500 text-white"
               whileHover={{
                 scale: 1.1,
                 transition: { duration: 1 },
@@ -93,7 +113,7 @@ function EventErstellen({}: Props) {
                   <p className="text-gray-600">{eventDescription}</p>
                   <motion.button
                     onClick={handleTeilNahme}
-                    className="btn via-magenta-500 mt-4 w-full bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+                    className="via-magenta-500 btn mt-4 w-full bg-gradient-to-r from-slate-500 to-pink-500 text-white"
                     whileHover={{
                       scale: 1.1,
                       transition: { duration: 1.2 },
