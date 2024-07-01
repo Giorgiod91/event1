@@ -2,7 +2,7 @@
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="dOjYaTh"><a href="https://imgur.com/dOjYaTh">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+![Screenshot](https://i.imgur.com/dOjYaTh.png)
 
 ## What's next? How do I make an app with this?
 
