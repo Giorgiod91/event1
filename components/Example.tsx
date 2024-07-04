@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 type Props = {};
+
 interface Event {
   name: string;
   dates: {
@@ -26,6 +27,11 @@ interface Event {
 function Example({}: Props) {
   const [selectedEvents, setSelectedEvents] = useState<Event[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
+  const [countryCode, setCountryCode] = useState("DE");
+  const [city, setCity] = useState("Hannover");
+  const [checkboxStates, setCheckboxStates] = useState<Record<number, boolean>>(
+    {},
+  );
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -38,7 +44,6 @@ function Example({}: Props) {
         }
         const data = await response.json();
         const events = data._embedded?.events ?? [];
-        // Filter events to ensure they are in Hannover
         const filteredEvents = events.filter((event) =>
           event._embedded.venues.some(
             (venue) => venue.city.name === "Hannover",
@@ -54,12 +59,27 @@ function Example({}: Props) {
     fetchEvents();
   }, []);
 
-  const handleTeilnahmeClick = (event: Event) => {
-    setSelectedEvents([...selectedEvents, event]);
+  const handleCheckboxChange = (index: number) => {
+    //state update function that updates the state of checkboxStates, prevStates is the current state of the checkboxStates object before the update
+    setCheckboxStates((prevStates) => ({
+      //...prevStates  creates a copy of the current checkboxStates object
+
+      ...prevStates,
+
+      // /[index]: !prevStates[index] sets the state of the checkbox at the given index to the opposite of its current value. If it was true, it becomes false, and vice versa.
+      [index]: !prevStates[index],
+    }));
+  };
+
+  const handleTeilnahmeClick = (event: Event, index: number) => {
+    // first check if the event is already in the selectedEvents array and if the checkbox is checked if both are true then add the event to the selectedEvents array
+    if (!selectedEvents.includes(event) && checkboxStates[index]) {
+      setSelectedEvents([...selectedEvents, event]);
+    }
   };
 
   return (
-    <div className="mx-auto flex h-screen flex-col items-center justify-center space-y-5 px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto flex min-h-screen flex-col items-center justify-center space-y-5 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-3xl flex-col gap-6 text-center">
         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 lg:text-4xl">
           Suche ein Event aus,
@@ -68,10 +88,9 @@ function Example({}: Props) {
           markiere es und füge es deinem EventPlan hinzu
         </h1>
       </div>
-      <div className="w-340 border-gradient-to-r via-magenta-500 border-4 from-slate-500 to-pink-500">
+      <div className="border-gradient-to-r via-magenta-500 w-full max-w-4xl border-4 from-slate-500 to-pink-500">
         <div className="overflow-x-auto overflow-y-hidden">
-          <table className="table">
-            {/* head */}
+          <table className="table w-full">
             <thead>
               <tr>
                 <th>
@@ -80,7 +99,7 @@ function Example({}: Props) {
                 <th>Name</th>
                 <th>Beschreibung</th>
                 <th>Ort</th>
-                <th></th>
+                <th>Preis</th>
               </tr>
             </thead>
             <tbody>
@@ -88,7 +107,12 @@ function Example({}: Props) {
                 <tr key={index}>
                   <th>
                     <label>
-                      <input type="checkbox" className="checkbox" />
+                      <input
+                        onChange={() => handleCheckboxChange(index)}
+                        type="checkbox"
+                        className="checkbox"
+                        checked={checkboxStates[index] || false}
+                      />
                     </label>
                   </th>
                   <td>
@@ -114,10 +138,14 @@ function Example({}: Props) {
                     </span>
                   </td>
                   <td>Hannover</td>
+                  <td>
+                    € {event.priceRanges ? event.priceRanges[0].max : "N/A"}
+                  </td>
+
                   <th>
                     <motion.button
-                      onClick={() => handleTeilnahmeClick(event)}
-                      className="btn btn-ghost btn-xs via-magenta-500 bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+                      onClick={() => handleTeilnahmeClick(event, index)}
+                      className="via-magenta-500 btn btn-ghost btn-xs bg-gradient-to-r from-slate-500 to-pink-500 text-white"
                       whileHover={{
                         scale: 1.2,
                         transition: { duration: 1 },
@@ -129,53 +157,57 @@ function Example({}: Props) {
                   </th>
                 </tr>
               ))}
-              {/* row 1 */}
             </tbody>
-            {/* foot */}
             <tfoot></tfoot>
           </table>
         </div>
       </div>
       {selectedEvents.length > 0 && (
-        <div className="mt-8 w-full max-w-3xl">
+        <div className="mt-8 w-full max-w-4xl">
           <h1 className="mb-4 text-center text-2xl font-bold">Meine Events</h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {selectedEvents.map((event, index) => (
-              <motion.div
-                key={index}
-                className="rounded-lg bg-white p-4 shadow-lg"
-                whileHover={{
-                  scale: 1.05,
-                  transition: { duration: 0.3 },
-                }}
-              >
-                <img
-                  src={event.images[0].url}
-                  alt="Event"
-                  className="h-40 w-full rounded-t-lg object-cover"
-                />
-                <div className="p-4">
-                  <h2 className="text-lg font-bold">{event.name}</h2>
-                  <p className="text-gray-600">{event.dates.start.localDate}</p>
-                  <p className="text-gray-600">Hannover</p>
+          <div className="max-h-96 overflow-y-auto">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+              {selectedEvents.map((event, index) => (
+                <motion.div
+                  key={index}
+                  className="rounded-lg border border-b-gray-500 bg-white p-4 shadow-lg"
+                  whileHover={{
+                    scale: 1.05,
+                    transition: { duration: 0.3 },
+                  }}
+                >
+                  <img
+                    src={event.images[0]?.url}
+                    alt="Event"
+                    className="h-40 w-full rounded-t-lg object-cover"
+                  />
+                  <div className="w-50 relative mt-4 h-[2px] bg-slate-500"></div>
 
-                  <div className="flex justify-end">
-                    <button
-                      onClick={() =>
-                        setSelectedEvents(
-                          selectedEvents.filter(
-                            (selectedEvent) => selectedEvent !== event,
-                          ),
-                        )
-                      }
-                      className="btn btn-ghost btn-xs via-magenta-500 bg-gradient-to-r from-slate-500 to-pink-500 text-white"
-                    >
-                      Entfernen
-                    </button>
+                  <div className="p-4">
+                    <h2 className="text-lg font-bold">{event.name}</h2>
+                    <p className="text-gray-600">
+                      {event.dates.start.localDate}
+                    </p>
+                    <p className="text-gray-600">Hannover</p>
+
+                    <div className="flex justify-end">
+                      <button
+                        onClick={() =>
+                          setSelectedEvents(
+                            selectedEvents.filter(
+                              (selectedEvent) => selectedEvent !== event,
+                            ),
+                          )
+                        }
+                        className="via-magenta-500 btn btn-ghost btn-xs bg-gradient-to-r from-slate-500 to-pink-500 text-white hover:text-black"
+                      >
+                        Entfernen
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       )}

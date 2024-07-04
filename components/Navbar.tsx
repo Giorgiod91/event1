@@ -1,18 +1,23 @@
 import React from "react";
+import { getServerAuthSession } from "~/server/auth";
 
 type Props = {};
 
-function Navbar({}: Props) {
+export async function Navbar({}: Props) {
+  const session = await getServerAuthSession();
   return (
     <div>
-      <div className="navbar via-magenta-500 bg-gradient-to-r from-slate-500 to-pink-500">
+      <div className="via-magenta-500 navbar bg-gradient-to-r from-slate-500 to-pink-500">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl text-white">EvenTS</a>
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a className="text-white">Login</a>
+              // login button with nextauth
+              <a href="/api/auth/signin" className="btn btn-ghost text-white">
+                Login
+              </a>
             </li>
             <li>
               <details>
@@ -40,5 +45,3 @@ function Navbar({}: Props) {
     </div>
   );
 }
-
-export default Navbar;

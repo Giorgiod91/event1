@@ -2,7 +2,7 @@ import EventErstellen from "components/EventErstellen";
 import Example from "components/Example";
 import Footer from "components/Footer";
 import LandingPage from "components/LandingPage";
-import Navbar from "components/Navbar";
+import { Navbar } from "components/Navbar";
 import SecondSection from "components/SecondSection";
 import ThirdSection from "components/thirdSection";
 import Link from "next/link";
@@ -39,24 +39,5 @@ export default async function Home() {
         <Footer />
       </section>
     </main>
-  );
-}
-
-async function CrudShowcase() {
-  const session = await getServerAuthSession();
-  if (!session?.user) return null;
-
-  const latestPost = await api.post.getLatest();
-
-  return (
-    <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
-      ) : (
-        <p>You have no posts yet.</p>
-      )}
-
-      <CreatePost />
-    </div>
   );
 }
