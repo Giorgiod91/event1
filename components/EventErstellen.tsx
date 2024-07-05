@@ -13,6 +13,9 @@ function EventErstellen({}: Props) {
   const [eventLocation, setEventLocation] = useState("");
   const [showPlan, setShowPlan] = useState(false);
   const [eventTeilNahme, setEventTeilNahme] = useState(false);
+  const [checkboxStates, setCheckboxStates] = useState<Record<number, boolean>>(
+    {},
+  );
 
   const {
     data: events,
@@ -71,9 +74,17 @@ function EventErstellen({}: Props) {
     );
   };
 
-  const handleTeilNahme = (event: any) => {
-    setSelectedEvents([...selectedEvents, event]);
-    setEventTeilNahme(true);
+  const handleCheckboxChange = (index: number) => {
+    setCheckboxStates((prevStates) => ({
+      ...prevStates,
+      [index]: !prevStates[index],
+    }));
+  };
+
+  const handleTeilnahmeClick = (event: any, index: number) => {
+    if (!selectedEvents.includes(event) && checkboxStates[index]) {
+      setSelectedEvents([...selectedEvents, event]);
+    }
   };
 
   const handleRemoveEvent = (eventToRemove: any) => {
@@ -148,41 +159,67 @@ function EventErstellen({}: Props) {
           <div className="w-full max-w-2xl space-y-6">
             <h2 className="text-center text-2xl font-bold">Geplante Events</h2>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-              {events?.map((event, index) => (
-                <motion.div
-                  key={index}
-                  className="rounded-lg bg-white p-4 shadow-lg"
-                  whileHover={{
-                    scale: 1.05,
-                    transition: { duration: 0.3 },
-                  }}
-                >
-                  <img
-                    src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png"
-                    alt="Event"
-                    className="h-40 w-full rounded-t-lg object-cover"
-                  />
-                  <div className="p-4">
-                    <h2 className="text-lg font-bold">{event.title}</h2>
-                    <p className="text-gray-600">
-                      {new Date(event.date).toLocaleDateString()}
-                    </p>
-                    <p className="text-gray-600">{event.location}</p>
-                    <p className="text-gray-600">{event.description}</p>
-                    <motion.button
-                      onClick={() => handleTeilNahme(event)}
-                      className="via-magenta-500 btn mt-4 w-full bg-gradient-to-r from-slate-500 to-pink-500 text-white"
-                      whileHover={{
-                        scale: 1.1,
-                        transition: { duration: 1.2 },
-                      }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      Teilnehmen
-                    </motion.button>
-                  </div>
-                </motion.div>
-              ))}
+              <table className="table w-full">
+                <thead>
+                  <tr>
+                    <th>
+                      <label></label>
+                    </th>
+                    <th>Name</th>
+                    <th>Beschreibung</th>
+                    <th>Ort</th>
+                    <th>Preis</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {events?.map((event, index) => (
+                    <tr key={index}>
+                      <th>
+                        <label>
+                          <input
+                            onChange={() => handleCheckboxChange(index)}
+                            type="checkbox"
+                            className="checkbox"
+                            checked={checkboxStates[index] || false}
+                          />
+                        </label>
+                      </th>
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <div className="avatar">
+                            <div className="mask mask-squircle h-12 w-12"></div>
+                          </div>
+                          <div>
+                            <div className="font-bold">{event.title}</div>
+                            <div className="text-sm opacity-50">
+                              {event.date.toLocaleDateString()}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        {event.description}
+                        <br />
+                        <span className="badge badge-ghost badge-sm"></span>
+                      </td>
+                      <td>Hannover</td>
+                      <th>
+                        <motion.button
+                          onClick={() => handleTeilnahmeClick(event, index)}
+                          className="via-magenta-500 btn btn-ghost btn-xs bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+                          whileHover={{
+                            scale: 1.2,
+                            transition: { duration: 1 },
+                          }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          Teilnehmen
+                        </motion.button>
+                      </th>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         )}
