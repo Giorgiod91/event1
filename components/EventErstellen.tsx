@@ -101,7 +101,7 @@ function EventErstellen({}: Props) {
       </h1>
       <div className="flex w-full max-w-4xl flex-col gap-8">
         {/* Create Event Form */}
-        <div className="rounded-3xl border border-base-content bg-white p-6 shadow-lg">
+        <div className="rounded-3xl border-2 border-base-content bg-white p-6 shadow-lg md:border-4">
           <h2 className="mb-4 text-xl font-bold">Neues Event erstellen</h2>
           <form onSubmit={handleCreateEvent} className="space-y-4">
             <input
@@ -151,9 +151,9 @@ function EventErstellen({}: Props) {
         </div>
 
         {/* Planned Events Section */}
-        <div className="rounded-3xl border border-base-content bg-white p-6 shadow-lg">
+        <div className="rounded-3xl border-2 border-base-content bg-white p-6 shadow-lg md:border-4">
           <h2 className="mb-4 text-xl font-bold">Geplante Events</h2>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 ">
             {events?.map((event, index) => (
               <motion.div
                 key={index}
@@ -191,7 +191,7 @@ function EventErstellen({}: Props) {
 
         {/* Selected Events Section */}
         {eventTeilNahme && (
-          <div className="rounded-3xl border border-base-content bg-white p-6 shadow-lg">
+          <div className="rounded-3xl border-2 border-base-content bg-white p-6 shadow-lg md:border-4">
             <h2 className="mb-4 text-xl font-bold">
               Meine ausgewählten Events
             </h2>
