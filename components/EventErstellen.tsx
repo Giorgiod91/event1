@@ -11,7 +11,6 @@ function EventErstellen({}: Props) {
   const [eventDate, setEventDate] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventLocation, setEventLocation] = useState("");
-  const [showPlan, setShowPlan] = useState(false);
   const [eventTeilNahme, setEventTeilNahme] = useState(false);
   const [checkboxStates, setCheckboxStates] = useState<Record<number, boolean>>(
     {},
@@ -29,16 +28,9 @@ function EventErstellen({}: Props) {
   const handleCreateEvent = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      console.log("Creating event with:", {
-        title,
-        date: eventDate,
-        description: eventDescription,
-        location: eventLocation,
-      });
-
       await createEventMutation.mutateAsync({
         title,
-        date: eventDate, // Pass date as a string
+        date: eventDate,
         description: eventDescription,
         location: eventLocation,
       });
@@ -50,8 +42,6 @@ function EventErstellen({}: Props) {
       setEventLocation("");
 
       await refetchEvents();
-      console.log("Event created and events refetched.");
-      setShowPlan(true); // Ensure showPlan is true to display the events
     } catch (error) {
       console.error("Error creating event:", error);
     }
@@ -84,13 +74,18 @@ function EventErstellen({}: Props) {
   const handleTeilnahmeClick = (event: any, index: number) => {
     if (!selectedEvents.includes(event) && checkboxStates[index]) {
       setSelectedEvents([...selectedEvents, event]);
+      setEventTeilNahme(true); // Set eventTeilNahme to true when an event is added
     }
   };
 
   const handleRemoveEvent = (eventToRemove: any) => {
-    setSelectedEvents(
-      selectedEvents.filter((event) => event !== eventToRemove),
+    const updatedSelectedEvents = selectedEvents.filter(
+      (event) => event !== eventToRemove,
     );
+    setSelectedEvents(updatedSelectedEvents);
+    if (updatedSelectedEvents.length === 0) {
+      setEventTeilNahme(false); // Set eventTeilNahme to false when no events are selected
+    }
   };
 
   useEffect(() => {
@@ -100,7 +95,7 @@ function EventErstellen({}: Props) {
   }, [events]);
 
   return (
-    <div className="px=4 mx-auto flex min-h-screen w-full flex-col items-center justify-center space-y-8 sm:px-6 lg:px-8">
+    <div className="mx-auto flex min-h-screen w-full flex-col items-center justify-center space-y-8 px-4 sm:px-6 lg:px-8">
       <h1 className="text-center text-3xl font-extrabold tracking-tight lg:text-4xl xl:text-5xl">
         Erstelle Events und teile sie mit anderen
       </h1>
@@ -155,74 +150,70 @@ function EventErstellen({}: Props) {
             </motion.button>
           </form>
         </div>
-        {showPlan && (
-          <div className="w-full max-w-2xl space-y-6">
-            <h2 className="text-center text-2xl font-bold">Geplante Events</h2>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-              <table className="table w-full">
-                <thead>
-                  <tr>
+        <div className="w-full max-w-2xl space-y-6">
+          <h2 className="text-center text-2xl font-bold">Geplante Events</h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            <table className="table w-full">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Beschreibung</th>
+                  <th>Ort</th>
+                  <th>Preis</th>
+                </tr>
+              </thead>
+              <tbody>
+                {events?.map((event, index) => (
+                  <tr key={index}>
                     <th>
-                      <label></label>
+                      <label>
+                        <input
+                          onChange={() => handleCheckboxChange(index)}
+                          type="checkbox"
+                          className="checkbox"
+                          checked={checkboxStates[index] || false}
+                        />
+                      </label>
                     </th>
-                    <th>Name</th>
-                    <th>Beschreibung</th>
-                    <th>Ort</th>
-                    <th>Preis</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {events?.map((event, index) => (
-                    <tr key={index}>
-                      <th>
-                        <label>
-                          <input
-                            onChange={() => handleCheckboxChange(index)}
-                            type="checkbox"
-                            className="checkbox"
-                            checked={checkboxStates[index] || false}
-                          />
-                        </label>
-                      </th>
-                      <td>
-                        <div className="flex items-center gap-3">
-                          <div className="avatar">
-                            <div className="mask mask-squircle h-12 w-12"></div>
-                          </div>
-                          <div>
-                            <div className="font-bold">{event.title}</div>
-                            <div className="text-sm opacity-50">
-                              {event.date.toLocaleDateString()}
-                            </div>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle h-12 w-12"></div>
+                        </div>
+                        <div>
+                          <div className="font-bold">{event.title}</div>
+                          <div className="text-sm opacity-50">
+                            {new Date(event.date).toLocaleDateString()}
                           </div>
                         </div>
-                      </td>
-                      <td>
-                        {event.description}
-                        <br />
-                        <span className="badge badge-ghost badge-sm"></span>
-                      </td>
-                      <td>Hannover</td>
-                      <th>
-                        <motion.button
-                          onClick={() => handleTeilnahmeClick(event, index)}
-                          className="via-magenta-500 btn btn-ghost btn-xs bg-gradient-to-r from-slate-500 to-pink-500 text-white"
-                          whileHover={{
-                            scale: 1.2,
-                            transition: { duration: 1 },
-                          }}
-                          whileTap={{ scale: 0.9 }}
-                        >
-                          Teilnehmen
-                        </motion.button>
-                      </th>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                      </div>
+                    </td>
+                    <td>
+                      {event.description}
+                      <br />
+                      <span className="badge badge-ghost badge-sm"></span>
+                    </td>
+                    <td>Hannover</td>
+                    <th>
+                      <motion.button
+                        onClick={() => handleTeilnahmeClick(event, index)}
+                        className="via-magenta-500 btn btn-ghost btn-xs bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+                        whileHover={{
+                          scale: 1.2,
+                          transition: { duration: 1 },
+                        }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        Teilnehmen
+                      </motion.button>
+                    </th>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        )}
+        </div>
         {eventTeilNahme && (
           <div className="mt-8 w-full max-w-2xl space-y-6">
             <h1 className="mb-4 text-center text-2xl font-bold">
