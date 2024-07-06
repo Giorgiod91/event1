@@ -102,7 +102,7 @@ function EventErstellen({}: Props) {
       <div className="flex w-full flex-col items-center justify-center gap-10 lg:flex-row">
         <div className="w-full max-w-md">
           <form
-            className="flex flex-col space-y-4 rounded-lg bg-white p-6 shadow-lg"
+            className="flex flex-col space-y-4 rounded-3xl rounded-lg border-2 border-base-content bg-white p-6 shadow-lg md:border-4"
             onSubmit={handleCreateEvent}
           >
             <input
@@ -152,7 +152,7 @@ function EventErstellen({}: Props) {
         </div>
         <div className="w-full max-w-2xl space-y-6">
           <h2 className="text-center text-2xl font-bold">Geplante Events</h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 rounded-3xl border-2 border-base-content sm:grid-cols-2 md:grid-cols-3 md:border-4">
             <table className="table w-full">
               <thead>
                 <tr>

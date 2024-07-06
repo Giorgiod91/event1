@@ -88,7 +88,7 @@ function Example({}: Props) {
           markiere es und füge es deinem EventPlan hinzu
         </h1>
       </div>
-      <div className="border-gradient-to-r via-magenta-500 w-full max-w-4xl border-4 from-slate-500 to-pink-500">
+      <div className="border-gradient-to-r via-magenta-500 w-full max-w-4xl rounded-3xl border-2 border-base-content from-slate-500 to-pink-500 md:border-4">
         <div className="overflow-x-auto overflow-y-hidden">
           <table className="table w-full">
             <thead>
