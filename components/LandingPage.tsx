@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { FaApple } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 type Props = {};
 interface Event {
@@ -68,15 +70,14 @@ function LandingPage({}: Props) {
   };
 
   return (
-    <div className="scrollbar scrollbar-track-slate-950 scrollbar-thumb-blue-400 h-screen space-y-10">
-      <div className="scrollbar scrollbar-track-white scrollbar-thumb-orange-400 relative m-2 mx-auto flex h-screen flex-col space-y-10 overflow-y-scroll p-5 sm:overflow-hidden md:flex-col lg:flex-row">
-        <div className="flex w-1/2 flex-row items-center justify-center">
+    <div className="h-screen bg-gradient-to-b from-slate-900 to-slate-950 text-white">
+      <div className="container mx-auto flex h-screen">
+        <div className="flex w-1/2 items-center justify-center">
           <div>
             {events.length > 0 && (
               <motion.div
                 key={currentIndex}
-                className="card bg-base-100 hover w-96 rounded-lg border
-    border-black p-5 shadow-xl duration-200"
+                className="card w-96 rounded-lg border border-black bg-base-100 p-5 shadow-xl duration-200"
                 variants={container}
                 initial="hidden"
                 animate="visible"
@@ -85,23 +86,27 @@ function LandingPage({}: Props) {
                   <motion.img
                     src={events[currentIndex].images[0].url}
                     alt="Event"
-                    className="h-60 w-full object-contain"
+                    className="h-60 w-full rounded-lg object-cover"
                     variants={item}
                   />
                 </figure>
                 <motion.div className="card-body" variants={item}>
-                  <h2 className="card-title">{events[currentIndex].name}</h2>
-                  <p>{/* Description goes here */}</p>
-                  <div className="card-actions justify-center">
+                  <h2 className="mb-2 text-xl font-bold">
+                    {events[currentIndex].name}
+                  </h2>
+                  <p className="mb-4 text-gray-400">
+                    {events[currentIndex].dates.start.localDate}
+                  </p>
+                  <div className="flex justify-center">
                     <motion.button
-                      className="btn via-magenta-500 bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+                      className="btn bg-gradient-to-r from-slate-500 to-pink-500 text-white"
                       whileHover={{
-                        scale: 1.2,
-                        transition: { duration: 1 },
+                        scale: 1.1,
+                        transition: { duration: 0.3 },
                       }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      Teilnehmen
+                      <a href="#EventSuchen"> Teilnehmen</a>
                     </motion.button>
                   </div>
                 </motion.div>
@@ -110,31 +115,32 @@ function LandingPage({}: Props) {
             {currentIndex < events.length - 1 && (
               <button
                 onClick={handleNextEvent}
-                className="join-item btn btn-outline via-magenta-500 bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+                className="btn btn-outline mt-4 bg-gradient-to-r from-slate-500 to-pink-500 text-white"
               >
                 Nächstes Event
               </button>
             )}
           </div>
         </div>
-        <div className="w-1/2">
-          <div className="relative top-40 p-5">
-            <h1 className="text-center text-5xl font-extrabold tracking-tight lg:text-left lg:text-6xl  xl:text-7xl">
-              Finde Events{" "}
-              <span className="via-magenta-500 bg-gradient-to-r from-black to-pink-500 bg-clip-text text-transparent">
-                in deiner Nähe
-              </span>{" "}
-              oder{" "}
-              <span className="via-magenta-500 bg-gradient-to-r from-slate-500 to-pink-500 bg-clip-text text-transparent">
-                erstelle deine eigenen
-              </span>
+        <div className="flex w-1/2 items-center justify-center">
+          <div className="px-8 text-center">
+            <h1 className="mb-8 text-4xl font-extrabold lg:text-6xl">
+              Finde und erstelle Events
             </h1>
-            <p className="text-center text-2xl leading-relaxed text-gray-700 lg:text-left">
-              Leicht Planen und Gestalten
+            <p className="mb-8 text-xl text-gray-300">
+              Entdecke Events in deiner Nähe oder plane deine eigenen
+              Veranstaltungen.
             </p>
-            <button className="btn btn-wide via-magenta-500 bg-gradient-to-r from-slate-500 to-pink-500 text-white">
-              Jetzt loslegen
+            <button className="btn btn-wide mb-4 bg-gradient-to-r from-slate-500 to-pink-500 text-white">
+              <a href="#EventErstellen"> Jetzt loslegen</a>
             </button>
+            <p className="text-sm text-gray-400">
+              Du kannst auch unsere App herunterladen
+            </p>
+            <div className="mt-2 flex justify-center">
+              <FaApple className="mx-2 h-10 w-24 object-contain" />
+              <FcGoogle className="mx-2 h-10 w-24 object-contain" />
+            </div>
           </div>
         </div>
       </div>

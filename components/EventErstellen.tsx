@@ -95,7 +95,7 @@ function EventErstellen({}: Props) {
   }, [events]);
 
   return (
-    <div className="mx-auto flex min-h-screen w-full flex-col items-center justify-center space-y-8 px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto flex min-h-screen w-full flex-col items-center justify-center space-y-8  px-4 sm:px-6 lg:px-8">
       <h1 className="mb-8 text-center text-3xl font-extrabold tracking-tight lg:text-4xl xl:text-5xl">
         Erstelle Events und teile sie mit anderen
       </h1>
