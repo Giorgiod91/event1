@@ -96,15 +96,14 @@ function EventErstellen({}: Props) {
 
   return (
     <div className="mx-auto flex min-h-screen w-full flex-col items-center justify-center space-y-8 px-4 sm:px-6 lg:px-8">
-      <h1 className="text-center text-3xl font-extrabold tracking-tight lg:text-4xl xl:text-5xl">
+      <h1 className="mb-8 text-center text-3xl font-extrabold tracking-tight lg:text-4xl xl:text-5xl">
         Erstelle Events und teile sie mit anderen
       </h1>
-      <div className="flex w-full flex-col items-center justify-center gap-10 lg:flex-row">
-        <div className="w-full max-w-md">
-          <form
-            className="flex flex-col space-y-4 rounded-3xl rounded-lg border-2 border-base-content bg-white p-6 shadow-lg md:border-4"
-            onSubmit={handleCreateEvent}
-          >
+      <div className="flex w-full max-w-4xl flex-col gap-8">
+        {/* Create Event Form */}
+        <div className="rounded-3xl border border-base-content bg-white p-6 shadow-lg">
+          <h2 className="mb-4 text-xl font-bold">Neues Event erstellen</h2>
+          <form onSubmit={handleCreateEvent} className="space-y-4">
             <input
               onChange={(e) => setTitle(e.target.value)}
               value={title}
@@ -139,10 +138,10 @@ function EventErstellen({}: Props) {
             />
             <motion.button
               type="submit"
-              className="via-magenta-500 btn w-full bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+              className="btn w-full bg-gradient-to-r from-slate-500 to-pink-500 text-white"
               whileHover={{
                 scale: 1.1,
-                transition: { duration: 1 },
+                transition: { duration: 0.3 },
               }}
               whileTap={{ scale: 0.9 }}
             >
@@ -150,111 +149,87 @@ function EventErstellen({}: Props) {
             </motion.button>
           </form>
         </div>
-        <div className="w-full max-w-2xl space-y-6">
-          <h2 className="text-center text-2xl font-bold">Geplante Events</h2>
-          <div className="grid grid-cols-1 gap-4 rounded-3xl border-2 border-base-content sm:grid-cols-2 md:grid-cols-3 md:border-4">
-            <table className="table w-full">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>Beschreibung</th>
-                  <th>Ort</th>
-                  <th>Preis</th>
-                </tr>
-              </thead>
-              <tbody>
-                {events?.map((event, index) => (
-                  <tr key={index}>
-                    <th>
-                      <label>
-                        <input
-                          onChange={() => handleCheckboxChange(index)}
-                          type="checkbox"
-                          className="checkbox"
-                          checked={checkboxStates[index] || false}
-                        />
-                      </label>
-                    </th>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle h-12 w-12"></div>
-                        </div>
-                        <div>
-                          <div className="font-bold">{event.title}</div>
-                          <div className="text-sm opacity-50">
-                            {new Date(event.date).toLocaleDateString()}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      {event.description}
-                      <br />
-                      <span className="badge badge-ghost badge-sm"></span>
-                    </td>
-                    <td>Hannover</td>
-                    <th>
-                      <motion.button
-                        onClick={() => handleTeilnahmeClick(event, index)}
-                        className="via-magenta-500 btn btn-ghost btn-xs bg-gradient-to-r from-slate-500 to-pink-500 text-white"
-                        whileHover={{
-                          scale: 1.2,
-                          transition: { duration: 1 },
-                        }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        Teilnehmen
-                      </motion.button>
-                    </th>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+
+        {/* Planned Events Section */}
+        <div className="rounded-3xl border border-base-content bg-white p-6 shadow-lg">
+          <h2 className="mb-4 text-xl font-bold">Geplante Events</h2>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {events?.map((event, index) => (
+              <motion.div
+                key={index}
+                className="flex items-start rounded-lg border border-gray-200 p-4"
+                whileHover={{
+                  scale: 1.02,
+                  transition: { duration: 0.3 },
+                }}
+              >
+                <div className="h-12 w-12 flex-shrink-0 rounded-full bg-gray-200"></div>
+                <div className="ml-4 flex-1">
+                  <h3 className="text-lg font-bold">{event.title}</h3>
+                  <p className="mb-2 text-sm text-gray-600">
+                    {new Date(event.date).toLocaleDateString()}
+                  </p>
+                  <p className="text-gray-600">{event.description}</p>
+                  <div className="mt-2">
+                    <motion.button
+                      onClick={() => handleTeilnahmeClick(event, index)}
+                      className="btn btn-ghost btn-xs bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+                      whileHover={{
+                        scale: 1.1,
+                        transition: { duration: 0.3 },
+                      }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      Teilnehmen
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
+
+        {/* Selected Events Section */}
         {eventTeilNahme && (
-          <div className="mt-8 w-full max-w-2xl space-y-6">
-            <h1 className="mb-4 text-center text-2xl font-bold">
-              Meine Events
-            </h1>
-            <div className="max-h-96 overflow-y-auto">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                {selectedEvents.map((event, index) => (
-                  <motion.div
-                    key={index}
-                    className="rounded-lg border border-b-gray-500 bg-white p-4 shadow-lg"
-                    whileHover={{
-                      scale: 1.05,
-                      transition: { duration: 0.3 },
-                    }}
-                  >
-                    <img
-                      src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png"
-                      alt="Event"
-                      className="h-40 w-full rounded-t-lg object-cover"
-                    />
-                    <div className="w-50 relative mt-4 h-[2px] bg-slate-500"></div>
-                    <div className="p-4">
-                      <h2 className="text-lg font-bold">{event.title}</h2>
-                      <p className="text-gray-600">
+          <div className="rounded-3xl border border-base-content bg-white p-6 shadow-lg">
+            <h2 className="mb-4 text-xl font-bold">
+              Meine ausgewählten Events
+            </h2>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {selectedEvents.map((event, index) => (
+                <motion.div
+                  key={index}
+                  className="flex flex-col rounded-lg border border-gray-200 p-4"
+                  whileHover={{
+                    scale: 1.02,
+                    transition: { duration: 0.3 },
+                  }}
+                >
+                  <div className="mb-2 flex items-center">
+                    <div className="h-12 w-12 flex-shrink-0 rounded-full bg-gray-200"></div>
+                    <div className="ml-4">
+                      <h3 className="text-lg font-bold">{event.title}</h3>
+                      <p className="mb-2 text-sm text-gray-600">
                         {new Date(event.date).toLocaleDateString()}
                       </p>
-                      <p className="text-gray-600">{event.location}</p>
                       <p className="text-gray-600">{event.description}</p>
-                      <div className="flex justify-end">
-                        <button
-                          onClick={() => handleRemoveEvent(event)}
-                          className="via-magenta-500 btn btn-ghost btn-xs bg-gradient-to-r from-slate-500 to-pink-500 text-white hover:text-black"
-                        >
-                          Entfernen
-                        </button>
-                      </div>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
+                  </div>
+                  <div className="mt-auto">
+                    <motion.button
+                      onClick={() => handleRemoveEvent(event)}
+                      className="btn btn-ghost btn-xs bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+                      whileHover={{
+                        scale: 1.1,
+                        transition: { duration: 0.3 },
+                      }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      Entfernen
+                    </motion.button>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         )}
