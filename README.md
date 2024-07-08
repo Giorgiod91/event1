@@ -1,31 +1,38 @@
-# Create T3 App
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
 ![Screenshot](https://i.imgur.com/dOjYaTh.png)
 
-## What's next? How do I make an app with this?
+# Event Creation App
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Installation](#installation)
+5. [Usage](#usage)
+6. [Components](#components)
+7. [API Integration](#api-integration)
+8. [Demo Events](#demo-events)
+9. [Future Improvements](#future-improvements)
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Introduction
+The Event Creation App is a React-based application that allows users to create, view, and manage events. Users can create new events, view a list of all planned events, and select events to participate in. The Events are connected to a db from supabase but for demo purpose i only use it if a user is logged in.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Features
+- Create new events with details like title, date, description, and location.
+- View a list of all planned events.
+- Select and participate in events.
+- View and manage selected events.
 
-## Learn More
+## Technologies Used
+- **React**: Front-end library for building user interfaces.
+- **Framer Motion**: Library for animations and gestures in React.
+- **TRPC**: Type-safe API calls in React using TypeScript.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Prisma**: For communicate with the db.
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/event-creation-app.git
