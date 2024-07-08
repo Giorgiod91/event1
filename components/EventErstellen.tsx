@@ -12,6 +12,7 @@ function EventErstellen({}: Props) {
   const [eventDescription, setEventDescription] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [eventTeilNahme, setEventTeilNahme] = useState(false);
+  const [demoEvents, setDemoEvents] = useState<any[]>([]); // for demo purposes
 
   const {
     data: events,
@@ -21,6 +22,23 @@ function EventErstellen({}: Props) {
 
   const createEventMutation = api.event.create.useMutation();
   const updateEventMutation = api.event.update.useMutation();
+
+  const createEventDemo = (event: React.FormEvent) => {
+    event.preventDefault();
+    const eventDemo = {
+      title,
+      date: eventDate,
+      description: eventDescription,
+      location: eventLocation,
+    };
+    setDemoEvents([...demoEvents, eventDemo]);
+
+    // Reset form fields
+    setTitle("");
+    setEventDate("");
+    setEventDescription("");
+    setEventLocation;
+  };
 
   const handleCreateEvent = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -87,13 +105,13 @@ function EventErstellen({}: Props) {
 
   return (
     <div className="mx-auto flex min-h-screen w-full flex-col items-center justify-center space-y-8 p-5 px-4 sm:px-6 lg:px-8">
-      <h1 className="mb-8 text-center text-3xl font-extrabold tracking-tight lg:text-4xl xl:text-5xl">
+      <h1 className="mb-8 text-center  text-4xl font-extrabold tracking-tight lg:text-6xl">
         Erstelle Events und teile sie mit anderen
       </h1>
       <div className="flex w-full max-w-4xl flex-col gap-8">
         <div className="rounded-3xl border-2 border-base-content bg-white p-6 shadow-lg md:border-4">
           <h2 className="mb-4 text-xl font-bold">Neues Event erstellen</h2>
-          <form onSubmit={handleCreateEvent} className="space-y-4">
+          <form onSubmit={createEventDemo} className="space-y-4">
             <input
               onChange={(e) => setTitle(e.target.value)}
               value={title}
@@ -143,7 +161,7 @@ function EventErstellen({}: Props) {
         <div className="rounded-3xl border-2 border-base-content bg-white p-6 shadow-lg md:border-4">
           <h2 className="mb-4 text-xl font-bold">Geplante Events</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {events?.map((event, index) => (
+            {demoEvents?.map((event, index) => (
               <motion.div
                 key={index}
                 className="flex items-start rounded-lg border border-gray-200 p-4"

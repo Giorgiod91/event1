@@ -81,10 +81,10 @@ function Example({}: Props) {
   return (
     <div className="mx-auto flex min-h-screen flex-col items-center justify-center space-y-5 p-5 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-3xl flex-col gap-6 text-center">
-        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 lg:text-4xl">
+        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 lg:text-6xl">
           Suche ein Event aus,
         </h1>
-        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 lg:text-4xl">
+        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 lg:text-6xl">
           markiere es und füge es deinem EventPlan hinzu
         </h1>
       </div>
@@ -93,9 +93,7 @@ function Example({}: Props) {
           <table className="table w-full">
             <thead>
               <tr>
-                <th>
-                  <label></label>
-                </th>
+                <th></th>
                 <th>Name</th>
                 <th>Beschreibung</th>
                 <th>Ort</th>
@@ -141,7 +139,6 @@ function Example({}: Props) {
                   <td>
                     € {event.priceRanges ? event.priceRanges[0].max : "N/A"}
                   </td>
-
                   <th>
                     <motion.button
                       onClick={() => handleTeilnahmeClick(event, index)}
@@ -158,7 +155,6 @@ function Example({}: Props) {
                 </tr>
               ))}
             </tbody>
-            <tfoot></tfoot>
           </table>
         </div>
       </div>
@@ -182,14 +178,12 @@ function Example({}: Props) {
                     className="h-40 w-full rounded-t-lg object-cover"
                   />
                   <div className="w-50 relative mt-4 h-[2px] bg-slate-500"></div>
-
                   <div className="p-4">
                     <h2 className="text-lg font-bold">{event.name}</h2>
                     <p className="text-gray-600">
                       {event.dates.start.localDate}
                     </p>
                     <p className="text-gray-600">Hannover</p>
-
                     <div className="flex justify-end">
                       <button
                         onClick={() =>
