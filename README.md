@@ -32,7 +32,3 @@ The Event Creation App is a React-based application that allows users to create,
 - **Prisma**: For communicate with the db.
 
 
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/event-creation-app.git
