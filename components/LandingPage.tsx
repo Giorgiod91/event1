@@ -71,8 +71,8 @@ function LandingPage({}: Props) {
 
   return (
     <div className="h-screen bg-gradient-to-b from-slate-900 to-slate-950 text-white">
-      <div className="container mx-auto flex h-screen">
-        <div className="flex w-1/2 items-center justify-center">
+      <div className="container mx-auto flex h-screen flex-col p-5 md:flex-row">
+        <div className="flex w-full flex-col items-center justify-center md:w-1/2">
           <div>
             {events.length > 0 && (
               <motion.div
@@ -106,7 +106,7 @@ function LandingPage({}: Props) {
                       }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <a href="#EventSuchen"> Teilnehmen</a>
+                      <a href="#EventSuchen">Teilnehmen</a>
                     </motion.button>
                   </div>
                 </motion.div>
@@ -122,7 +122,7 @@ function LandingPage({}: Props) {
             )}
           </div>
         </div>
-        <div className="flex w-1/2 items-center justify-center">
+        <div className="flex w-full items-center justify-center md:w-1/2">
           <div className="px-8 text-center">
             <h1 className="mb-8 text-4xl font-extrabold lg:text-6xl">
               Finde und erstelle Events
@@ -132,7 +132,7 @@ function LandingPage({}: Props) {
               Veranstaltungen.
             </p>
             <button className="btn btn-wide mb-4 bg-gradient-to-r from-slate-500 to-pink-500 text-white">
-              <a href="#EventErstellen"> Jetzt loslegen</a>
+              <a href="#EventErstellen">Jetzt loslegen</a>
             </button>
             <p className="text-sm text-gray-400">
               Du kannst auch unsere App herunterladen
