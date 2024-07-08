@@ -79,7 +79,7 @@ function Example({}: Props) {
   };
 
   return (
-    <div className="mx-auto flex min-h-screen flex-col items-center justify-center space-y-5 px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto flex min-h-screen flex-col items-center justify-center space-y-5 p-5 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-3xl flex-col gap-6 text-center">
         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 lg:text-4xl">
           Suche ein Event aus,

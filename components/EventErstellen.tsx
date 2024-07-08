@@ -12,9 +12,6 @@ function EventErstellen({}: Props) {
   const [eventDescription, setEventDescription] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [eventTeilNahme, setEventTeilNahme] = useState(false);
-  const [checkboxStates, setCheckboxStates] = useState<Record<number, boolean>>(
-    {},
-  );
 
   const {
     data: events,
@@ -46,6 +43,7 @@ function EventErstellen({}: Props) {
       console.error("Error creating event:", error);
     }
   };
+  // for updating the event in my db but not using it for now i just want to showcase a demo of how to update an event
 
   const handleUpdateEvent = (eventId: number, completed: boolean) => {
     updateEventMutation.mutate(
@@ -64,17 +62,10 @@ function EventErstellen({}: Props) {
     );
   };
 
-  const handleCheckboxChange = (index: number) => {
-    setCheckboxStates((prevStates) => ({
-      ...prevStates,
-      [index]: !prevStates[index],
-    }));
-  };
-
-  const handleTeilnahmeClick = (event: any, index: number) => {
-    if (!selectedEvents.includes(event) && checkboxStates[index]) {
+  const handleTeilnahmeClick = (event: any) => {
+    if (!selectedEvents.includes(event)) {
       setSelectedEvents([...selectedEvents, event]);
-      setEventTeilNahme(true); // Set eventTeilNahme to true when an event is added
+      setEventTeilNahme(true);
     }
   };
 
@@ -84,7 +75,7 @@ function EventErstellen({}: Props) {
     );
     setSelectedEvents(updatedSelectedEvents);
     if (updatedSelectedEvents.length === 0) {
-      setEventTeilNahme(false); // Set eventTeilNahme to false when no events are selected
+      setEventTeilNahme(false);
     }
   };
 
@@ -95,12 +86,11 @@ function EventErstellen({}: Props) {
   }, [events]);
 
   return (
-    <div className="mx-auto flex min-h-screen w-full flex-col items-center justify-center space-y-8  px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto flex min-h-screen w-full flex-col items-center justify-center space-y-8 p-5 px-4 sm:px-6 lg:px-8">
       <h1 className="mb-8 text-center text-3xl font-extrabold tracking-tight lg:text-4xl xl:text-5xl">
         Erstelle Events und teile sie mit anderen
       </h1>
       <div className="flex w-full max-w-4xl flex-col gap-8">
-        {/* Create Event Form */}
         <div className="rounded-3xl border-2 border-base-content bg-white p-6 shadow-lg md:border-4">
           <h2 className="mb-4 text-xl font-bold">Neues Event erstellen</h2>
           <form onSubmit={handleCreateEvent} className="space-y-4">
@@ -150,10 +140,9 @@ function EventErstellen({}: Props) {
           </form>
         </div>
 
-        {/* Planned Events Section */}
         <div className="rounded-3xl border-2 border-base-content bg-white p-6 shadow-lg md:border-4">
           <h2 className="mb-4 text-xl font-bold">Geplante Events</h2>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 ">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {events?.map((event, index) => (
               <motion.div
                 key={index}
@@ -172,7 +161,7 @@ function EventErstellen({}: Props) {
                   <p className="text-gray-600">{event.description}</p>
                   <div className="mt-2">
                     <motion.button
-                      onClick={() => handleTeilnahmeClick(event, index)}
+                      onClick={() => handleTeilnahmeClick(event)}
                       className="btn btn-ghost btn-xs bg-gradient-to-r from-slate-500 to-pink-500 text-white"
                       whileHover={{
                         scale: 1.1,
@@ -189,7 +178,6 @@ function EventErstellen({}: Props) {
           </div>
         </div>
 
-        {/* Selected Events Section */}
         {eventTeilNahme && (
           <div className="rounded-3xl border-2 border-base-content bg-white p-6 shadow-lg md:border-4">
             <h2 className="mb-4 text-xl font-bold">
