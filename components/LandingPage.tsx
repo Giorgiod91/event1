@@ -70,14 +70,14 @@ function LandingPage({}: Props) {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-b from-slate-900 to-slate-950 text-white">
+    <div className="via-darkblue h-screen bg-gradient-to-r from-black to-blue-950  text-white">
       <div className="container mx-auto flex h-screen flex-col p-5 md:flex-row">
         <div className="flex w-full flex-col items-center justify-center md:w-1/2">
           <div>
             {events.length > 0 && (
               <motion.div
                 key={currentIndex}
-                className="card w-96 rounded-lg border border-black bg-base-100 p-5 shadow-xl duration-200"
+                className="card w-96 rounded-lg border border-white bg-white p-5 shadow-xl duration-200"
                 variants={container}
                 initial="hidden"
                 animate="visible"
@@ -91,7 +91,7 @@ function LandingPage({}: Props) {
                   />
                 </figure>
                 <motion.div className="card-body" variants={item}>
-                  <h2 className="mb-2 text-xl font-bold">
+                  <h2 className="mb-2 text-xl font-bold text-black">
                     {events[currentIndex].name}
                   </h2>
                   <p className="mb-4 text-gray-400">
@@ -127,7 +127,7 @@ function LandingPage({}: Props) {
             <h1 className="mb-8 text-4xl font-extrabold lg:text-6xl">
               Finde und erstelle Events
             </h1>
-            <p className="mb-8 text-xl text-gray-300">
+            <p className="mb-8 text-xl text-white">
               Entdecke Events in deiner Nähe oder plane deine eigenen
               Veranstaltungen.
             </p>
