@@ -84,7 +84,7 @@ function LandingPage({}: Props) {
               >
                 <figure>
                   <motion.img
-                    src={events[currentIndex].images[0].url}
+                    src={events[currentIndex]?.images[0]?.url}
                     alt="Event"
                     className="h-60 w-full rounded-lg object-cover"
                     variants={item}
@@ -92,10 +92,10 @@ function LandingPage({}: Props) {
                 </figure>
                 <motion.div className="card-body" variants={item}>
                   <h2 className="mb-2 text-xl font-bold text-black">
-                    {events[currentIndex].name}
+                    {events[currentIndex]?.name}
                   </h2>
                   <p className="mb-4 text-gray-400">
-                    {events[currentIndex].dates.start.localDate}
+                    {events[currentIndex]?.dates.start.localDate}
                   </p>
                   <div className="flex justify-center">
                     <motion.button

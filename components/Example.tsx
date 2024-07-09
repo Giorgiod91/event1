@@ -22,6 +22,9 @@ interface Event {
       };
     }[];
   };
+  priceRanges?: {
+    max: number;
+  }[];
 }
 
 function Example({}: Props) {
@@ -44,7 +47,7 @@ function Example({}: Props) {
         }
         const data = await response.json();
         const events = data._embedded?.events ?? [];
-        const filteredEvents = events.filter((event) =>
+        const filteredEvents = events.filter((event: Event) =>
           event._embedded.venues.some(
             (venue) => venue.city.name === "Hannover",
           ),
@@ -126,7 +129,7 @@ function Example({}: Props) {
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
-                          <img src={event.images[0].url} alt="Event" />
+                          <img src={event.images[0]!.url} alt="Event" />
                         </div>
                       </div>
                       <div>
@@ -146,9 +149,7 @@ function Example({}: Props) {
                     </span>
                   </td>
                   <td>Hannover</td>
-                  <td>
-                    € {event.priceRanges ? event.priceRanges[0].max : "N/A"}
-                  </td>
+                  <td>€ {event.priceRanges?.[0]?.max ?? "N/A"}</td>
                   <th>
                     <motion.button
                       onClick={() => handleTeilnahmeClick(event, index)}
