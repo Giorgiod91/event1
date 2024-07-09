@@ -1,6 +1,6 @@
 
 
-![Screenshot](https://i.imgur.com/dOjYaTh.png)
+![image](https://github.com/Giorgiod91/event1/assets/109972616/de474131-3c78-4b96-bd65-7e4ec65f89c2)
 
 # Event Creation App
 
