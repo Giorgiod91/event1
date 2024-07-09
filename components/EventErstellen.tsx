@@ -104,9 +104,9 @@ function EventErstellen({}: Props) {
   }, [events]);
 
   return (
-    <div className="mx-auto flex min-h-screen w-full flex-col items-center justify-center space-y-8 p-5 px-4 sm:px-6 lg:px-8">
-      <h1 className="mb-8 text-center  text-4xl font-extrabold tracking-tight lg:text-6xl">
-        Erstelle Events und teile sie mit anderen
+    <div className="mx-auto flex min-h-screen w-full flex-col items-center justify-center space-y-8 bg-[#FFF8F3] p-5 px-4 sm:px-6 lg:px-8">
+      <h1 className="mb-8 text-center text-4xl font-extrabold tracking-tight lg:text-6xl">
+        Erstelle und teile Events
       </h1>
       <div className="flex w-full max-w-4xl flex-col gap-8">
         <div className="rounded-3xl border-2 border-base-content bg-white p-6 shadow-lg md:border-4">
@@ -146,7 +146,7 @@ function EventErstellen({}: Props) {
             />
             <motion.button
               type="submit"
-              className="btn w-full bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+              className="btn w-full bg-neutral text-white hover:text-black"
               whileHover={{
                 scale: 1.1,
                 transition: { duration: 0.3 },
@@ -180,7 +180,7 @@ function EventErstellen({}: Props) {
                   <div className="mt-2">
                     <motion.button
                       onClick={() => handleTeilnahmeClick(event)}
-                      className="btn btn-ghost btn-xs bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+                      className="btn btn-ghost btn-xs bg-neutral text-white hover:text-black"
                       whileHover={{
                         scale: 1.1,
                         transition: { duration: 0.3 },
@@ -224,7 +224,7 @@ function EventErstellen({}: Props) {
                   <div className="mt-auto">
                     <motion.button
                       onClick={() => handleRemoveEvent(event)}
-                      className="btn btn-ghost btn-xs bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+                      className="btn btn-ghost btn-xs bg-neutral text-white hover:text-black"
                       whileHover={{
                         scale: 1.1,
                         transition: { duration: 0.3 },

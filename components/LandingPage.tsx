@@ -70,14 +70,14 @@ function LandingPage({}: Props) {
   };
 
   return (
-    <div className="via-darkblue h-screen bg-gradient-to-r from-black to-blue-950  text-white">
+    <div className="h-screen bg-[#FFF5E4]  text-white">
       <div className="container mx-auto flex h-screen flex-col p-5 md:flex-row">
         <div className="flex w-full flex-col items-center justify-center md:w-1/2">
           <div>
             {events.length > 0 && (
               <motion.div
                 key={currentIndex}
-                className="card w-96 rounded-lg border border-white bg-white p-5 shadow-xl duration-200"
+                className="card w-96 rounded-lg border-2 border-base-content bg-white p-5 shadow-xl duration-200 "
                 variants={container}
                 initial="hidden"
                 animate="visible"
@@ -99,7 +99,7 @@ function LandingPage({}: Props) {
                   </p>
                   <div className="flex justify-center">
                     <motion.button
-                      className="btn bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+                      className="btn bg-neutral text-white shadow-xl hover:text-black"
                       whileHover={{
                         scale: 1.1,
                         transition: { duration: 0.3 },
@@ -115,7 +115,7 @@ function LandingPage({}: Props) {
             {currentIndex < events.length - 1 && (
               <button
                 onClick={handleNextEvent}
-                className="btn btn-outline mt-4 bg-gradient-to-r from-slate-500 to-pink-500 text-white"
+                className="btn  mt-4 bg-neutral text-white hover:text-black"
               >
                 Nächstes Event
               </button>
@@ -124,21 +124,24 @@ function LandingPage({}: Props) {
         </div>
         <div className="flex w-full items-center justify-center md:w-1/2">
           <div className="px-8 text-center">
-            <h1 className="mb-8 text-4xl font-extrabold lg:text-6xl">
+            <h1 className="b mb-8 text-4xl font-extrabold text-black lg:text-6xl ">
               Finde und erstelle Events
             </h1>
-            <p className="mb-8 text-xl text-white">
+            <p className="mb-8 text-xl text-gray-400">
               Entdecke Events in deiner Nähe oder plane deine eigenen
               Veranstaltungen.
             </p>
-            <button className="btn btn-wide mb-4 bg-gradient-to-r from-slate-500 to-pink-500 text-white">
+            <button className="btn  btn-wide mb-4 bg-neutral text-white hover:text-black  ">
               <a href="#EventErstellen">Jetzt loslegen</a>
             </button>
             <p className="text-sm text-gray-400">
               Du kannst auch unsere App herunterladen
             </p>
             <div className="mt-2 flex justify-center">
-              <FaApple className="mx-2 h-10 w-24 object-contain" />
+              <FaApple
+                className="mx-2 h-10 w-24  object-contain"
+                color="black"
+              />
               <FcGoogle className="mx-2 h-10 w-24 object-contain" />
             </div>
           </div>

@@ -6,7 +6,7 @@ type Props = {};
 export async function Navbar({}: Props) {
   const session = await getServerAuthSession();
   return (
-    <div className="via-magenta-500 flex   bg-gradient-to-r from-slate-500 to-pink-500">
+    <div className="via-magenta-500 flex   bg-neutral">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl text-white">EvenTS</a>
       </div>
