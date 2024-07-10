@@ -87,7 +87,7 @@ function Example({}: Props) {
         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 lg:text-6xl">
           Wähle ein Event
         </h1>
-        <p className="text-2xl text-gray-700">
+        <p className="text-xl font-medium text-gray-800">
           Markiere es und füge es deinem EventPlan hinzu
         </p>
       </div>
@@ -152,7 +152,7 @@ function Example({}: Props) {
                   <th>
                     <motion.button
                       onClick={() => handleTeilnahmeClick(event, index)}
-                      className="via-magenta-500 btn btn-ghost btn-xs bg-[#BF95F9] text-white hover:text-black"
+                      className="via-magenta-500 btn btn-ghost btn-xs bg-[#BF95F9] text-white hover:bg-purple-700"
                       whileHover={{
                         scale: 1.2,
                         transition: { duration: 1 },

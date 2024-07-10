@@ -180,7 +180,7 @@ function EventErstellen({}: Props) {
                   <div className="mt-2">
                     <motion.button
                       onClick={() => handleTeilnahmeClick(event)}
-                      className="btn btn-ghost btn-xs bg-neutral text-white hover:text-black"
+                      className="btn btn-ghost btn-xs bg-[#BF95F9]  text-white hover:bg-purple-700"
                       whileHover={{
                         scale: 1.1,
                         transition: { duration: 0.3 },
@@ -224,7 +224,7 @@ function EventErstellen({}: Props) {
                   <div className="mt-auto">
                     <motion.button
                       onClick={() => handleRemoveEvent(event)}
-                      className="btn btn-ghost btn-xs bg-neutral text-white hover:text-black"
+                      className="btn btn-ghost btn-xs bg-[#BF95F9] text-white hover:bg-purple-700"
                       whileHover={{
                         scale: 1.1,
                         transition: { duration: 0.3 },
