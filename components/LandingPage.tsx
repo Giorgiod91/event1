@@ -77,7 +77,7 @@ function LandingPage({}: Props) {
             {events.length > 0 && (
               <motion.div
                 key={currentIndex}
-                className="card w-96 rounded-lg border-2 border-base-content bg-white p-5 shadow-xl duration-200 "
+                className="card w-96 rounded-lg border-2 border-base-content bg-[#FFF8F3] p-5 shadow-xl duration-200 "
                 variants={container}
                 initial="hidden"
                 animate="visible"

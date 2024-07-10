@@ -82,7 +82,7 @@ function Example({}: Props) {
   };
 
   return (
-    <div className="mx-auto flex min-h-screen flex-col items-center justify-center space-y-5  bg-[#FFF8F3] p-5 px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto flex min-h-screen flex-col items-center justify-center space-y-5 bg-[#FFF8F3] p-5 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-3xl flex-col gap-6 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 lg:text-6xl">
           Wähle ein Event
@@ -99,7 +99,7 @@ function Example({}: Props) {
           stiffness: 260,
           damping: 20,
         }}
-        className="border-gradient-to-r via-magenta-500 w-full max-w-4xl rounded-3xl border-2 border-base-content from-slate-500 to-pink-500 md:border-4"
+        className="border-gradient-to-r via-magenta-500 w-full max-w-4xl rounded-3xl border-2 border-base-content bg-white from-slate-500 to-pink-500 md:border-4"
       >
         <div className="overflow-x-auto overflow-y-hidden">
           <table className="table w-full">
@@ -142,7 +142,6 @@ function Example({}: Props) {
                   </td>
                   <td className="hover:scale-105">
                     {event.name}
-
                     <br />
                     <span className="badge badge-ghost badge-sm">
                       {event.name}
@@ -153,7 +152,7 @@ function Example({}: Props) {
                   <th>
                     <motion.button
                       onClick={() => handleTeilnahmeClick(event, index)}
-                      className="via-magenta-500 btn btn-ghost btn-xs bg-neutral text-white hover:text-black"
+                      className="via-magenta-500 btn btn-ghost btn-xs bg-[#BF95F9] text-white hover:text-black"
                       whileHover={{
                         scale: 1.2,
                         transition: { duration: 1 },
@@ -195,7 +194,7 @@ function Example({}: Props) {
                       {event.dates.start.localDate}
                     </p>
                     <p className="text-gray-600">Hannover</p>
-                    <div className="flex  ">
+                    <div className="flex">
                       <button
                         onClick={() =>
                           setSelectedEvents(
@@ -204,7 +203,7 @@ function Example({}: Props) {
                             ),
                           )
                         }
-                        className="via-magenta-500 btn btn-ghost btn-xs bg-neutral text-white hover:text-black"
+                        className="via-magenta-500 btn btn-ghost btn-xs bg-[#BF95F9] text-white hover:text-black"
                       >
                         Entfernen
                       </button>

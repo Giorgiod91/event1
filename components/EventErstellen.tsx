@@ -146,7 +146,7 @@ function EventErstellen({}: Props) {
             />
             <motion.button
               type="submit"
-              className="btn w-full bg-neutral text-white hover:text-black"
+              className="btn w-full bg-[#BF95F9] text-white hover:bg-purple-700"
               whileHover={{
                 scale: 1.1,
                 transition: { duration: 0.3 },
