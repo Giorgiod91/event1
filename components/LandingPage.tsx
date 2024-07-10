@@ -70,7 +70,7 @@ function LandingPage({}: Props) {
   };
 
   return (
-    <div className="h-screen bg-[#FFF5E4]  text-white">
+    <div data-theme="dracula" className="h-screen   text-white">
       <div className="container mx-auto flex h-screen flex-col p-5 md:flex-row">
         <div className="flex w-full flex-col items-center justify-center md:w-1/2">
           <div>
@@ -99,7 +99,7 @@ function LandingPage({}: Props) {
                   </p>
                   <div className="flex justify-center">
                     <motion.button
-                      className="btn bg-neutral text-white shadow-xl hover:text-black"
+                      className="btn  bg-[#BF95F9] text-white shadow-xl hover:bg-purple-700 "
                       whileHover={{
                         scale: 1.1,
                         transition: { duration: 0.3 },
@@ -115,7 +115,7 @@ function LandingPage({}: Props) {
             {currentIndex < events.length - 1 && (
               <button
                 onClick={handleNextEvent}
-                className="btn  mt-4 bg-neutral text-white hover:text-black"
+                className="btn  mt-4 bg-[#BF95F9] text-white  hover:bg-purple-700"
               >
                 Nächstes Event
               </button>
@@ -124,14 +124,14 @@ function LandingPage({}: Props) {
         </div>
         <div className="flex w-full items-center justify-center md:w-1/2">
           <div className="px-8 text-center">
-            <h1 className="b mb-8 text-4xl font-extrabold text-black lg:text-6xl ">
+            <h1 className="mb-4 bg-gradient-to-r from-accent to-secondary bg-clip-text text-5xl font-black tracking-tight text-transparent drop-shadow-xl sm:text-6xl md:text-7xl ">
               Finde und erstelle Events
             </h1>
             <p className="mb-8 text-xl text-gray-400">
               Entdecke Events in deiner Nähe oder plane deine eigenen
               Veranstaltungen.
             </p>
-            <button className="btn  btn-wide mb-4 bg-neutral text-white hover:text-black  ">
+            <button className="btn  btn-wide mb-4 bg-[#BF95F9] text-white hover:bg-purple-700  ">
               <a href="#EventErstellen">Jetzt loslegen</a>
             </button>
             <p className="text-sm text-gray-400">
@@ -140,7 +140,7 @@ function LandingPage({}: Props) {
             <div className="mt-2 flex justify-center">
               <FaApple
                 className="mx-2 h-10 w-24  object-contain"
-                color="black"
+                color="white"
               />
               <FcGoogle className="mx-2 h-10 w-24 object-contain" />
             </div>
