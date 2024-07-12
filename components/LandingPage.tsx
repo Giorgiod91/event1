@@ -57,7 +57,7 @@ function LandingPage() {
         if (!response.ok) {
           throw new Error(`Error fetching events: ${response.statusText}`);
         }
-
+        // @ts-ignore
         const data: TicketmasterResponse = await response.json();
         const events = data._embedded.events;
         const uniqueEvents = events.filter(

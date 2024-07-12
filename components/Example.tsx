@@ -41,6 +41,7 @@ function Example() {
         if (!response.ok) {
           throw new Error(`Error fetching events: ${response.statusText}`);
         }
+        // @ts-ignore
         const data: { _embedded?: { events: Event[] } } = await response.json();
         const events = data._embedded?.events ?? [];
         const filteredEvents = events.filter((event) =>
