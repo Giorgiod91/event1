@@ -57,8 +57,8 @@ function LandingPage() {
         if (!response.ok) {
           throw new Error(`Error fetching events: ${response.statusText}`);
         }
-        // Remove the unused @ts-expect-error directive
-        const data: TicketmasterResponse = await response.json();
+
+        const data = (await response.json()) as TicketmasterResponse;
         const events = data._embedded.events;
         const uniqueEvents = events.filter(
           (event, index, self) =>
