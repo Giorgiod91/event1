@@ -1,6 +1,7 @@
 
 
-![image](https://github.com/Giorgiod91/event1/assets/109972616/de474131-3c78-4b96-bd65-7e4ec65f89c2)
+![image](https://github.com/user-attachments/assets/4cf134c9-8492-4220-b8fa-025869283198)
+
 
 # Event Creation App
 
