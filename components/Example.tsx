@@ -25,6 +25,12 @@ interface Event {
   }[];
 }
 
+interface TicketmasterResponse {
+  _embedded?: {
+    events: Event[];
+  };
+}
+
 function Example() {
   const [selectedEvents, setSelectedEvents] = useState<Event[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
@@ -41,8 +47,8 @@ function Example() {
         if (!response.ok) {
           throw new Error(`Error fetching events: ${response.statusText}`);
         }
-        // Remove the unused @ts-expect-error directive
-        const data: { _embedded?: { events: Event[] } } = await response.json();
+
+        const data: TicketmasterResponse = await response.json();
         const events = data._embedded?.events ?? [];
         const filteredEvents = events.filter((event) =>
           event._embedded.venues.some(
