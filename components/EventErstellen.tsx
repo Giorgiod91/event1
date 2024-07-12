@@ -84,14 +84,14 @@ function EventErstellen() {
     );
   };
 
-  const handleTeilnahmeClick = (event: any) => {
+  const handleTeilnahmeClick = (event: Event) => {
     if (!selectedEvents.includes(event)) {
       setSelectedEvents([...selectedEvents, event]);
       setEventTeilNahme(true);
     }
   };
 
-  const handleRemoveEvent = (eventToRemove: any) => {
+  const handleRemoveEvent = (eventToRemove: Event) => {
     const updatedSelectedEvents = selectedEvents.filter(
       (event) => event !== eventToRemove,
     );

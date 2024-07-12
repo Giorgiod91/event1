@@ -28,8 +28,6 @@ interface Event {
 function Example() {
   const [selectedEvents, setSelectedEvents] = useState<Event[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
-  const [countryCode, setCountryCode] = useState("DE");
-  const [city, setCity] = useState("Hannover");
   const [checkboxStates, setCheckboxStates] = useState<Record<number, boolean>>(
     {},
   );
@@ -43,9 +41,9 @@ function Example() {
         if (!response.ok) {
           throw new Error(`Error fetching events: ${response.statusText}`);
         }
-        const data = await response.json();
+        const data: { _embedded?: { events: Event[] } } = await response.json();
         const events = data._embedded?.events ?? [];
-        const filteredEvents = events.filter((event: Event) =>
+        const filteredEvents = events.filter((event) =>
           event._embedded.venues.some(
             (venue) => venue.city.name === "Hannover",
           ),
@@ -61,19 +59,13 @@ function Example() {
   }, []);
 
   const handleCheckboxChange = (index: number) => {
-    //state update function that updates the state of checkboxStates, prevStates is the current state of the checkboxStates object before the update
     setCheckboxStates((prevStates) => ({
-      //...prevStates  creates a copy of the current checkboxStates object
-
       ...prevStates,
-
-      // /[index]: !prevStates[index] sets the state of the checkbox at the given index to the opposite of its current value. If it was true, it becomes false, and vice versa.
       [index]: !prevStates[index],
     }));
   };
 
   const handleTeilnahmeClick = (event: Event, index: number) => {
-    // first check if the event is already in the selectedEvents array and if the checkbox is checked if both are true then add the event to the selectedEvents array
     if (!selectedEvents.includes(event) && checkboxStates[index]) {
       setSelectedEvents([...selectedEvents, event]);
     }
@@ -127,7 +119,7 @@ function Example() {
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
-                          <img src={event.images[0]!.url} alt="Event" />
+                          <img src={event.images[0]?.url} alt="Event" />
                         </div>
                       </div>
                       <div>
