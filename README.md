@@ -1,6 +1,7 @@
 
 
-![image](https://github.com/Giorgiod91/event1/assets/109972616/de474131-3c78-4b96-bd65-7e4ec65f89c2)
+![image](https://github.com/user-attachments/assets/4cf134c9-8492-4220-b8fa-025869283198)
+
 
 # Event Creation App
 
@@ -23,6 +24,7 @@ The Event Creation App is a React-based application that allows users to create,
 - View a list of all planned events.
 - Select and participate in events.
 - View and manage selected events.
+- ading Srtipe soon
 
 ## Technologies Used
 - **React**: Front-end library for building user interfaces.
@@ -30,5 +32,7 @@ The Event Creation App is a React-based application that allows users to create,
 - **TRPC**: Type-safe API calls in React using TypeScript.
 - **Tailwind CSS**: Utility-first CSS framework for styling.
 - **Prisma**: For communicate with the db.
+- **daisyui**: For Styling, Themes and so on.
+- **Next-Auth**: For authentication.
 
 
