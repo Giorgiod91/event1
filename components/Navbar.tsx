@@ -13,9 +13,7 @@ export async function Navbar() {
 
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
-            <li>
-              <a className="text-xl font-black text-black ">Link</a>
-            </li>
+            <li></li>
             <li>
               <details>
                 <summary className="text-xl font-black text-black hover:bg-[#BF95F9]">
