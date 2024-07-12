@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaApple } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { set } from "zod";
 
 interface Event {
   name: string;
@@ -16,6 +15,12 @@ interface Event {
   images: {
     url: string;
   }[];
+}
+
+interface TicketmasterResponse {
+  _embedded: {
+    events: Event[];
+  };
 }
 
 function LandingPage() {
@@ -44,7 +49,6 @@ function LandingPage() {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      // hiding the API key in the frontend
       const apikey = process.env.NEXT_PUBLIC_TICKETMASTER_API_KEY;
       try {
         const response = await fetch(
@@ -54,11 +58,10 @@ function LandingPage() {
           throw new Error(`Error fetching events: ${response.statusText}`);
         }
 
-        const data = await response.json();
+        const data: TicketmasterResponse = await response.json();
         const events = data._embedded.events;
-        // Remove duplicate events
         const uniqueEvents = events.filter(
-          (event: Event, index: number, self: Event[]) =>
+          (event, index, self) =>
             index === self.findIndex((e) => e.name === event.name),
         );
 
@@ -79,7 +82,7 @@ function LandingPage() {
   };
 
   return (
-    <div data-theme="dracula" className="h-screen   text-white">
+    <div data-theme="dracula" className="h-screen text-white">
       <div className="container mx-auto flex h-screen flex-col p-5 md:flex-row">
         <div className="flex w-full flex-col items-center justify-center md:w-1/2">
           <div>
@@ -108,7 +111,7 @@ function LandingPage() {
                   </p>
                   <div className="flex justify-center">
                     <motion.button
-                      className="btn  bg-[#BF95F9] text-white shadow-xl hover:bg-purple-700 "
+                      className="btn bg-[#BF95F9] text-white shadow-xl hover:bg-purple-700"
                       whileHover={{
                         scale: 1.1,
                         transition: { duration: 0.3 },
@@ -124,7 +127,7 @@ function LandingPage() {
             {currentIndex < events.length - 1 && (
               <button
                 onClick={handleNextEvent}
-                className="btn  mt-4 bg-[#BF95F9] text-white  hover:bg-purple-700"
+                className="btn mt-4 bg-[#BF95F9] text-white hover:bg-purple-700"
               >
                 Nächstes Event
               </button>
@@ -133,14 +136,14 @@ function LandingPage() {
         </div>
         <div className="flex w-full items-center justify-center md:w-1/2">
           <div className="px-8 text-center">
-            <h1 className="mb-4 bg-gradient-to-r from-accent to-secondary bg-clip-text text-5xl font-black tracking-tight text-transparent drop-shadow-xl sm:text-6xl md:text-7xl ">
+            <h1 className="mb-4 bg-gradient-to-r from-accent to-secondary bg-clip-text text-5xl font-black tracking-tight text-transparent drop-shadow-xl sm:text-6xl md:text-7xl">
               Finde und erstelle Events
             </h1>
             <p className="mb-8 text-xl text-gray-400">
               Entdecke Events in deiner Nähe oder plane deine eigenen
               Veranstaltungen.
             </p>
-            <button className="btn  btn-wide mb-4 bg-[#BF95F9] text-white hover:bg-purple-700  ">
+            <button className="btn btn-wide mb-4 bg-[#BF95F9] text-white hover:bg-purple-700">
               <a href="#EventErstellen">Jetzt loslegen</a>
             </button>
             <p className="text-sm text-gray-400">
@@ -148,7 +151,7 @@ function LandingPage() {
             </p>
             <div className="mt-2 flex justify-center">
               <FaApple
-                className="mx-2 h-10 w-24  object-contain"
+                className="mx-2 h-10 w-24 object-contain"
                 color="white"
               />
               <FcGoogle className="mx-2 h-10 w-24 object-contain" />
