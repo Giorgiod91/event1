@@ -41,7 +41,6 @@ function LandingPage() {
 
   const [events, setEvents] = useState<Event[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  console.log(process.env.TICKETMASTER_API_KEY);
 
   useEffect(() => {
     const fetchEvents = async () => {
