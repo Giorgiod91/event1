@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaApple } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { set } from "zod";
 
-type Props = {};
 interface Event {
   name: string;
   dates: {
@@ -18,7 +18,7 @@ interface Event {
   }[];
 }
 
-function LandingPage({}: Props) {
+function LandingPage() {
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -41,19 +41,29 @@ function LandingPage({}: Props) {
 
   const [events, setEvents] = useState<Event[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  console.log(process.env.TICKETMASTER_API_KEY);
 
   useEffect(() => {
     const fetchEvents = async () => {
+      // hiding the API key in the frontend
+      const apikey = process.env.NEXT_PUBLIC_TICKETMASTER_API_KEY;
       try {
         const response = await fetch(
-          "https://app.ticketmaster.com/discovery/v2/events.json?apikey=9kvw9fCMZfFe363wHUrKAKAfHaivj4BA",
+          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apikey}`,
         );
         if (!response.ok) {
           throw new Error(`Error fetching events: ${response.statusText}`);
         }
+
         const data = await response.json();
         const events = data._embedded.events;
-        setEvents(events);
+        // Remove duplicate events
+        const uniqueEvents = events.filter(
+          (event: Event, index: number, self: Event[]) =>
+            index === self.findIndex((e) => e.name === event.name),
+        );
+
+        setEvents(uniqueEvents);
         console.log(events);
       } catch (error) {
         console.error("Error fetching events:", error);

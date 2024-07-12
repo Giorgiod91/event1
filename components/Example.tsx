@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-type Props = {};
-
 interface Event {
   name: string;
   dates: {
@@ -27,7 +25,7 @@ interface Event {
   }[];
 }
 
-function Example({}: Props) {
+function Example() {
   const [selectedEvents, setSelectedEvents] = useState<Event[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const [countryCode, setCountryCode] = useState("DE");
@@ -203,7 +201,7 @@ function Example({}: Props) {
                             ),
                           )
                         }
-                        className="via-magenta-500 btn btn-ghost btn-xs bg-[#BF95F9] text-white hover:text-black"
+                        className="via-magenta-500 btn btn-ghost btn-xs bg-[#BF95F9] text-white hover:bg-purple-700"
                       >
                         Entfernen
                       </button>

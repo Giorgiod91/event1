@@ -2,9 +2,7 @@
 import React from "react";
 import { Typewriter, useTypewriter } from "react-simple-typewriter";
 
-type Props = {};
-
-function ThirdSection({}: Props) {
+function ThirdSection() {
   const [text, count] = useTypewriter({
     words: ["Plane deine eigenen Events"],
     loop: true,

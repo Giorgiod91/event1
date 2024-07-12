@@ -3,9 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { api } from "~/trpc/react";
 
-type Props = {};
-
-function EventErstellen({}: Props) {
+function EventErstellen() {
   const [selectedEvents, setSelectedEvents] = useState<any[]>([]);
   const [title, setTitle] = useState("");
   const [eventDate, setEventDate] = useState("");

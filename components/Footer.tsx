@@ -1,8 +1,6 @@
 import React from "react";
 
-type Props = {};
-
-function Footer({}: Props) {
+function Footer() {
   return (
     <div>
       <footer className="via-magenta-500 footer footer-center bg-neutral p-10 text-white">

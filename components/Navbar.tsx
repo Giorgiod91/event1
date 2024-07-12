@@ -1,13 +1,12 @@
 import React from "react";
 import { getServerAuthSession } from "~/server/auth";
 
-type Props = {};
-
-export async function Navbar({}: Props) {
+export async function Navbar() {
   const session = await getServerAuthSession();
+  //bg-[#FFF8F3]
   return (
-    <div className="max-full navbar mx-auto bg-[#FFF8F3] ">
-      <div className="navbar mx-auto flex max-w-5xl justify-between bg-[#FFF8F3]">
+    <div className="max-full navbar mx-auto bg-[#F7E7DC] ">
+      <div className="navbar mx-auto flex max-w-5xl justify-between bg-[#F7E7DC]">
         <a className="btn btn-ghost mb-4 text-2xl font-black tracking-tight drop-shadow-xl hover:bg-[#BF95F9] sm:text-6xl md:text-3xl">
           EventOne
         </a>

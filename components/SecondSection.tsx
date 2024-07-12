@@ -2,9 +2,7 @@
 import React from "react";
 import { Typewriter, useTypewriter } from "react-simple-typewriter";
 
-type Props = {};
-
-function SecondSection({}: Props) {
+function SecondSection() {
   const [text, count] = useTypewriter({
     words: ["Finde Events in deiner Nähe"],
     loop: true,
