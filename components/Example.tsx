@@ -55,7 +55,7 @@ function Example() {
       }
     };
 
-    fetchEvents();
+    void fetchEvents();
   }, []);
 
   const handleCheckboxChange = (index: number) => {
@@ -111,7 +111,7 @@ function Example() {
                         onChange={() => handleCheckboxChange(index)}
                         type="checkbox"
                         className="checkbox"
-                        checked={checkboxStates[index] || false}
+                        checked={checkboxStates[index] ?? false}
                       />
                     </label>
                   </th>

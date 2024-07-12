@@ -72,7 +72,7 @@ function LandingPage() {
       }
     };
 
-    fetchEvents();
+    void fetchEvents();
   }, []);
 
   const handleNextEvent = () => {
