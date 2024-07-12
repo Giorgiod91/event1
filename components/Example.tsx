@@ -39,10 +39,11 @@ function Example() {
   );
 
   useEffect(() => {
+    const apikey = process.env.NEXT_PUBLIC_TICKETMASTER_API_KEY;
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          "https://app.ticketmaster.com/discovery/v2/events.json?apikey=9kvw9fCMZfFe363wHUrKAKAfHaivj4BA&city=Hannover&countryCode=DE",
+          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apikey}&city=Hannover&countryCode=DE`,
         );
         if (!response.ok) {
           throw new Error(`Error fetching events: ${response.statusText}`);
