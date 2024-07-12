@@ -5,6 +5,8 @@
 
 # Event Creation App
 
+## Live Demo : https://event1-alpha.vercel.app/
+
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Features](#features)
