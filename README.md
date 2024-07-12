@@ -24,6 +24,7 @@ The Event Creation App is a React-based application that allows users to create,
 - View a list of all planned events.
 - Select and participate in events.
 - View and manage selected events.
+- ading Srtipe soon
 
 ## Technologies Used
 - **React**: Front-end library for building user interfaces.
