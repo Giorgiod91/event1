@@ -2,15 +2,21 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { api } from "~/trpc/react";
+interface Event {
+  title: string;
+  date: string;
+  description: string;
+  location: string;
+}
 
 function EventErstellen() {
-  const [selectedEvents, setSelectedEvents] = useState<any[]>([]);
+  const [selectedEvents, setSelectedEvents] = useState<Event[]>([]);
   const [title, setTitle] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [eventTeilNahme, setEventTeilNahme] = useState(false);
-  const [demoEvents, setDemoEvents] = useState<any[]>([]); // for demo purposes
+  const [demoEvents, setDemoEvents] = useState<Event[]>([]); // for demo purposes
 
   const {
     data: events,
