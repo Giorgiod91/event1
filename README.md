@@ -32,5 +32,7 @@ The Event Creation App is a React-based application that allows users to create,
 - **TRPC**: Type-safe API calls in React using TypeScript.
 - **Tailwind CSS**: Utility-first CSS framework for styling.
 - **Prisma**: For communicate with the db.
+- **daisyui**: For Styling, Themes and so on.
+- **Next-Auth**: For authentication.
 
 
