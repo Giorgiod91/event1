@@ -48,7 +48,7 @@ function Example() {
           throw new Error(`Error fetching events: ${response.statusText}`);
         }
 
-        const data: TicketmasterResponse = await response.json();
+        const data = (await response.json()) as TicketmasterResponse;
         const events = data._embedded?.events ?? [];
         const filteredEvents = events.filter((event) =>
           event._embedded.venues.some(
@@ -64,7 +64,6 @@ function Example() {
 
     void fetchEvents();
   }, []);
-
   const handleCheckboxChange = (index: number) => {
     setCheckboxStates((prevStates) => ({
       ...prevStates,
